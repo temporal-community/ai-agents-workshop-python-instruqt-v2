@@ -1,0 +1,13 @@
+# Instruqt CLI artifacts
+instruqt/**/*.remote
+
+# Docker build artifacts
+docker/**/__pycache__/
+docker/**/*.pyc
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

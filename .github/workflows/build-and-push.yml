@@ -1,0 +1,96 @@
+name: Build image and push track
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      code_ref:
+        description: 'Branch/tag/SHA of ai-agents-workshop-python to bake'
+        required: false
+        default: 'main'
+
+jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      docker: ${{ steps.filter.outputs.docker }}
+      instruqt: ${{ steps.filter.outputs.instruqt }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          docker:
+            - 'docker/**'
+          instruqt:
+            - 'instruqt/**'
+
+  build-image:
+    needs: paths-filter
+    if: needs.paths-filter.outputs.docker == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Checkout companion code repo
+      uses: actions/checkout@v4
+      with:
+        repository: temporal-community/ai-agents-workshop-python
+        ref: ${{ github.event.inputs.code_ref || 'main' }}
+        path: ai-agents-workshop-python
+
+    - name: Log in to GHCR
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: docker/Dockerfile
+        push: true
+        tags: |
+          ghcr.io/temporal-community/ai-agents-workshop-python-instruqt-v2:latest
+          ghcr.io/temporal-community/ai-agents-workshop-python-instruqt-v2:${{ github.sha }}
+
+  push-track:
+    needs: [paths-filter, build-image]
+    if: |
+      always() &&
+      (needs.paths-filter.outputs.instruqt == 'true' || needs.paths-filter.outputs.docker == 'true' || github.event_name == 'workflow_dispatch') &&
+      (needs.build-image.result == 'success' || needs.build-image.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Instruqt CLI
+      run: |
+        curl -fsSL https://github.com/instruqt/cli/releases/latest/download/instruqt-linux.zip \
+          -o instruqt.zip
+        unzip -q instruqt.zip
+        sudo install -m 0755 instruqt /usr/local/bin/instruqt
+        instruqt version
+
+    - name: Push track
+      env:
+        INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
+      run: cd instruqt && instruqt track push --force
+
+    - name: Commit writeback (checksum + tab ids)
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add instruqt/
+        git diff --staged --quiet || \
+          git commit -m "chore: instruqt writeback after push [skip ci]"
+        git push
