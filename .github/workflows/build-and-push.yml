@@ -77,7 +77,7 @@ jobs:
       run: |
         curl -fsSL https://github.com/instruqt/cli/releases/latest/download/instruqt-linux.zip \
           -o instruqt.zip
-        unzip -q instruqt.zip
+        echo "A" | unzip instruqt.zip
         sudo install -m 0755 instruqt /usr/local/bin/instruqt
         instruqt version
 
