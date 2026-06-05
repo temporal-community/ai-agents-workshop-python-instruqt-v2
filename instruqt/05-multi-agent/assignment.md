@@ -72,7 +72,7 @@ enhanced_loading: null
 
 ## What Changed
 
-Click the [button label="Editor" background="#444CE7"](tab-5) tab and open `demo5-multi-agent`:
+Click the [button label="Editor" background="#444CE7"](tab-5) tab. Key files in `demo5-multi-agent`:
 
 - `personal_assistant.py` - the orchestrator. Uses `child_workflow_as_tool` for weather and `nexus_operation_as_tool` for F1.
 - `weather_agent.py` - runs as its own workflow on `weather-agent-tq`.

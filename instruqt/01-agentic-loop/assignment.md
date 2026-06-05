@@ -66,7 +66,7 @@ enhanced_loading: null
 
 ## The Code
 
-Click the [button label="Editor" background="#444CE7"](tab-4) tab and open `demo1-agentic-loop`. Key files:
+Click the [button label="Editor" background="#444CE7"](tab-4) tab. Key files in `demo1-agentic-loop`:
 
 - `workflows/agent.py` - the `while True` loop: call LLM, dispatch tool if needed, repeat until done
 - `activities/openai_responses.py` - the LLM activity
@@ -104,12 +104,12 @@ Switch to the [button label="Temporal UI" background="#444CE7"](tab-2) tab while
 
 ## The Durability Point
 
-Click the [button label="Starter" background="#444CE7"](tab-1) terminal and run a multi-step prompt that chains several tools:
+Before running the next prompt, click the [button label="Network Control Panel" background="#444CE7"](tab-3) and disable **Weather**. Then click the [button label="Starter" background="#444CE7"](tab-1) and run:
 
 ```bash,run
 uv run python -m start_workflow "What is the weather where I am right now?"
 ```
 
-While it runs, click the [button label="Network Control Panel" background="#444CE7"](tab-3) tab and disable **Weather**. Watch the activity fail and retry in the Temporal UI. Re-enable it and watch the workflow resume - no code changes.
+Watch the activity fail and retry in the [button label="Temporal UI" background="#444CE7"](tab-2). Go back to the [button label="Network Control Panel" background="#444CE7"](tab-3), re-enable **Weather**, and watch the workflow resume.
 
 Click **Check** when you've run at least one workflow successfully.

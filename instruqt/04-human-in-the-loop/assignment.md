@@ -67,7 +67,7 @@ enhanced_loading: null
 
 ## What Changed
 
-Click the [button label="Editor" background="#444CE7"](tab-4) tab and open `demo4-hitl`:
+Click the [button label="Editor" background="#444CE7"](tab-4) tab. Key files in `demo4-hitl`:
 
 - `tools_workflow.py` - an `ask_user` `@function_tool` is defined inside `run()` as a closure. It sets `self._input_needed = True` and blocks on `await workflow.wait_condition(...)`. The signal handler flips the flag to unblock it.
 - `start_workflow.py` - polls queries every 2 seconds. When `is_input_needed` is True, it prints the question, reads your response, and sends it as a signal.

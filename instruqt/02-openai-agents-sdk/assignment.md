@@ -62,7 +62,7 @@ enhanced_loading: null
 
 ## What Changed
 
-Click the [button label="Editor" background="#444CE7"](tab-4) tab and open `demo2-openai-temporal-integration`. Compare it to demo1:
+Click the [button label="Editor" background="#444CE7"](tab-4) tab. Key files in `demo2-openai-temporal-integration`:
 
 - `tools_workflow.py` - the entire agentic loop is now one line: `result = await Runner.run(agent, input=question)`
 - `tool_activities.py` - tools are `@activity.defn` functions. `activity_as_tool(...)` wraps each one for the SDK.
@@ -90,6 +90,12 @@ Click the [button label="Temporal UI" background="#444CE7"](tab-2) tab. Look at 
 
 ## Break It
 
-Start a new workflow, then use the [button label="Network Control Panel" background="#444CE7"](tab-3) to disable **Weather**. Watch the weather activities fail and retry. Re-enable and watch the workflow succeed.
+Before running the next prompt, click the [button label="Network Control Panel" background="#444CE7"](tab-3) and disable **Weather**. Then click the [button label="Starter" background="#444CE7"](tab-1) and run:
+
+```bash,run
+uv run python -m start_workflow "What is the weather in London?"
+```
+
+Watch the weather activities fail and retry in the [button label="Temporal UI" background="#444CE7"](tab-2). Go back to the [button label="Network Control Panel" background="#444CE7"](tab-3), re-enable **Weather**, and watch the workflow succeed.
 
 Click **Check** when you've run at least one workflow successfully.

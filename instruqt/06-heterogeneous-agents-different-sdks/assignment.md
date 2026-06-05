@@ -71,7 +71,7 @@ enhanced_loading: null
 
 ## What Changed
 
-Click the [button label="Editor" background="#444CE7"](tab-5) tab and open `demo6a-different-sdks`:
+Click the [button label="Editor" background="#444CE7"](tab-5) tab. Key files in `demo6a-different-sdks`:
 
 - `travel_planner.py` - the Strands travel agent. **Zero Temporal imports.** Could be a library vendored from another team's codebase.
 - `travel_planner_activity.py` - a single `@activity.defn` wrapper. It lazy-imports `travel_planner` and calls `run()`. About 10 lines.

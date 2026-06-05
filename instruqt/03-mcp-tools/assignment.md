@@ -61,7 +61,7 @@ enhanced_loading: null
 
 ## What Changed
 
-Click the [button label="Editor" background="#444CE7"](tab-4) tab and open `demo3-mcp`:
+Click the [button label="Editor" background="#444CE7"](tab-4) tab. Key files in `demo3-mcp`:
 
 - `worker.py` - a `StatelessMCPServerProvider` is registered with the plugin. It launches the F1 MCP server process and wraps its operations as Temporal activities automatically.
 - `tools_workflow.py` - `stateless_mcp_server("f1-data")` gives the agent a handle to the MCP server. Eight F1 tools appear alongside the four weather tools.
@@ -87,7 +87,7 @@ uv run python -m start_workflow "When is the next F1 race and what's the weather
 
 ## Watch the Event History
 
-Click the [button label="Temporal UI" background="#444CE7"](tab-2) tab. Three kinds of activity entries in the workflow history:
+Click the [button label="Temporal UI" background="#444CE7"](tab-2) tab. Three kinds of activity entries are listed in the workflow history:
 
 - `InvokeModelActivity` - LLM reasoning steps
 - Weather activities (`get_coordinates`, `get_weather`, etc.)
@@ -95,9 +95,17 @@ Click the [button label="Temporal UI" background="#444CE7"](tab-2) tab. Three ki
 
 ## Break It
 
-Click the [button label="Network Control Panel" background="#444CE7"](tab-3) and disable **Weather** mid-workflow. Watch the weather activities fail and retry. Re-enable and watch them succeed.
+Before running the next prompt, click the [button label="Network Control Panel" background="#444CE7"](tab-3) and disable **Weather**. Then click the [button label="Starter" background="#444CE7"](tab-1) and run:
+
+```bash,run
+uv run python -m start_workflow "What is the weather in Paris?"
+```
+
+Watch the weather activities fail and retry in the [button label="Temporal UI" background="#444CE7"](tab-2). Go back to the [button label="Network Control Panel" background="#444CE7"](tab-3), re-enable **Weather**, and watch the workflow succeed.
 
 ## Try More Prompts
+
+Click the [button label="Starter" background="#444CE7"](tab-1) terminal.
 
 ```bash,run
 uv run python -m start_workflow "What is the 2026 F1 race calendar?"
