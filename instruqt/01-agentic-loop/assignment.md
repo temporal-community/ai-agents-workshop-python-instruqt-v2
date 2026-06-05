@@ -55,7 +55,7 @@ tabs:
   hostname: workshop
   path: /root/workshop/demo1-agentic-loop
 difficulty: basic
-timelimit: 1200
+timelimit: 1800
 enhanced_loading: null
 ---
 
@@ -81,11 +81,7 @@ Click the [button label="Worker" background="#444CE7"](tab-0) terminal.
 uv run python -m worker
 ```
 
-You should see:
-
-```bash,nocopy
-Worker started. Listening on task queue: tool-invoking-agent-python-task-queue
-```
+The worker is ready when the cursor returns and you see worker output in the terminal.
 
 ## Run It
 
@@ -97,11 +93,11 @@ uv run python -m start_workflow "What is the weather in Barcelona?"
 
 ## Watch the Event History
 
-Click the [button label="Temporal UI" background="#444CE7"](tab-2) tab while the workflow runs. Click into it. Each LLM call and each tool invocation appears as a separate activity in the event history - the full decision trail of the agent.
+Switch to the [button label="Temporal UI" background="#444CE7"](tab-2) tab while the workflow runs. Click into it and you'll see each LLM call and each tool invocation as a separate activity in the event history - the full decision trail of the agent.
 
 ## The Durability Point
 
-Run a multi-step prompt that chains several tools:
+Click the [button label="Starter" background="#444CE7"](tab-1) terminal and run a multi-step prompt that chains several tools:
 
 ```bash,run
 uv run python -m start_workflow "What is the weather where I am right now?"

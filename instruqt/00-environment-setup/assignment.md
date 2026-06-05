@@ -64,13 +64,21 @@ Click the [button label="Temporal UI" background="#444CE7"](tab-1) tab. An empty
 python --version && uv --version && temporal --version && node --version && java -version
 ```
 
-## Verify your API key
+## Set your API key
+
+You need your own OpenAI API key for this workshop. Add it to your shell so it persists across all terminal tabs:
+
+```bash,run
+echo 'export OPENAI_API_KEY=sk-your-key-here' >> ~/.bashrc && source ~/.bashrc
+```
+
+Replace `sk-your-key-here` with your actual key. Verify it took:
 
 ```bash,run
 echo $OPENAI_API_KEY
 ```
 
-You should see a key starting with `sk-`. If it's empty, let your facilitator know.
+You should see your key starting with `sk-`.
 
 ## Check the Network Control Panel
 

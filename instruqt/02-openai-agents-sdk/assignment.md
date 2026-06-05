@@ -51,7 +51,7 @@ tabs:
   hostname: workshop
   path: /root/workshop/demo2-openai-temporal-integration
 difficulty: basic
-timelimit: 1200
+timelimit: 1800
 enhanced_loading: null
 ---
 
