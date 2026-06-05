@@ -86,7 +86,8 @@ jobs:
       env:
         INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
       run: |
-        instruqt auth login --token "$INSTRUQT_TOKEN"
+        mkdir -p /home/runner/.config/instruqt
+        echo "token: $INSTRUQT_TOKEN" > /home/runner/.config/instruqt/credentials
         cd instruqt && instruqt track push --force
 
     - name: Commit writeback (checksum + tab ids)
