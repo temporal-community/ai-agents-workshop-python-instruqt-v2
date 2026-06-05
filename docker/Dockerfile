@@ -14,6 +14,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV WORKSPACE=/opt/workshop
 ENV F1_MCP_HOME=/opt/f1-mcp-server
+ENV PYTHONUNBUFFERED=1
 
 # ── 1. System packages ────────────────────────────────────────────────────────
 # Use GCP regional mirror for reliability inside GCP-hosted Instruqt sandboxes.
@@ -145,6 +146,7 @@ RUN echo '' >> /etc/bash.bashrc \
     && echo 'export PATH=$PATH:/root/.temporalio/bin:/usr/local/bin' >> /etc/bash.bashrc \
     && echo 'export TEMPORAL_ADDRESS="127.0.0.1:7233"' >> /etc/bash.bashrc \
     && echo 'export F1_MCP_SERVER_HOME=/opt/f1-mcp-server' >> /etc/bash.bashrc \
+    && echo 'export PYTHONUNBUFFERED=1' >> /etc/bash.bashrc \
     && echo 'export HTTP_PROXY="http://127.0.0.1:8888"' >> /etc/bash.bashrc \
     && echo 'export HTTPS_PROXY="http://127.0.0.1:8888"' >> /etc/bash.bashrc \
     && echo 'export NO_PROXY="127.0.0.1,localhost"' >> /etc/bash.bashrc \
@@ -152,5 +154,9 @@ RUN echo '' >> /etc/bash.bashrc \
     && echo 'export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt' >> /etc/bash.bashrc \
     && echo 'export NODE_EXTRA_CA_CERTS="/root/.mitmproxy/mitmproxy-ca-cert.pem"' >> /etc/bash.bashrc \
     && echo '[ -f /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion' >> /etc/bash.bashrc
+
+RUN echo '' >> /root/.bashrc \
+    && echo '# Source workshop environment' >> /root/.bashrc \
+    && echo '[ -f /etc/bash.bashrc ] && . /etc/bash.bashrc' >> /root/.bashrc
 
 WORKDIR /root

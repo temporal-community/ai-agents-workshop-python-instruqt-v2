@@ -66,7 +66,7 @@ python --version && uv --version && temporal --version && node --version && java
 
 ## Set your API key
 
-You need your own OpenAI API key for this workshop. Add it to your shell so it persists across all terminal tabs:
+You need your own OpenAI API key for this workshop. Run this command with your actual key:
 
 ```bash,run
 echo 'export OPENAI_API_KEY=sk-your-key-here' >> ~/.bashrc && source ~/.bashrc
@@ -78,7 +78,7 @@ Replace `sk-your-key-here` with your actual key. Verify it took:
 echo $OPENAI_API_KEY
 ```
 
-You should see your key starting with `sk-`.
+You should see your key starting with `sk-`. Every terminal tab you open from here will have it automatically.
 
 ## Check the Network Control Panel
 

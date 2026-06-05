@@ -111,6 +111,8 @@ That contrast is the point.
 
 ## Try More Prompts
 
+Click the [button label="Starter" background="#444CE7"](tab-2) terminal.
+
 ```bash,run
 uv run python -m start_workflow "Tell me about Monaco as a travel destination."
 ```

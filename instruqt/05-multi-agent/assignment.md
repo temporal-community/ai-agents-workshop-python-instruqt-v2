@@ -114,6 +114,8 @@ Each specialist is independently observable, independently retryable, and could 
 
 ## Try More Prompts
 
+Click the [button label="Starter" background="#444CE7"](tab-2) terminal.
+
 ```bash,run
 uv run python -m start_workflow "What's the current weather at the locations of the next two F1 races?"
 ```

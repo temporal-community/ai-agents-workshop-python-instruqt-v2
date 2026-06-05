@@ -98,9 +98,9 @@ When you respond, a new event appears in the history: the signal arrives, `wait_
 
 ## Reconnect to a Waiting Workflow
 
-If you close the [button label="Starter" background="#444CE7"](tab-1) terminal while the agent is waiting, the workflow keeps running on the server. Find the workflow ID in the [button label="Temporal UI" background="#444CE7"](tab-2), then reconnect:
+If you interrupt the worker with **Ctrl+C** while the agent is waiting, the workflow keeps running on the server. Find the workflow ID in the [button label="Temporal UI" background="#444CE7"](tab-2), then reconnect by starting the worker again and running the starter with the workflow ID:
 
-```bash,nocopy
+```bash
 uv run python -m start_workflow --workflow-id <workflow-id-from-ui>
 ```
 

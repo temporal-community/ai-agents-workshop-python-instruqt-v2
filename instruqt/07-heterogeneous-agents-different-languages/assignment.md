@@ -130,6 +130,8 @@ Then find the **`TravelPlannerAgentWorkflow`** on `travel-planner-agent-tq`. Its
 
 ## Try More Prompts
 
+Click the [button label="Starter" background="#444CE7"](tab-3) terminal.
+
 ```bash,run
 uv run python -m start_workflow "What's the weather at the next F1 race and what should I know about visiting the destination?"
 ```

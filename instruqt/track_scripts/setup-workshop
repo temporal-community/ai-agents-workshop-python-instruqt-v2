@@ -76,9 +76,36 @@ if [ -n "${OPENAI_API_KEY:-}" ]; then
     cat >> /root/.bashrc <<EOF
 export OPENAI_API_KEY=${OPENAI_API_KEY}
 EOF
+    # Also write to /etc/environment so all sessions see it.
+    echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> /etc/environment
     echo "OPENAI_API_KEY injected."
 else
     echo "WARNING: OPENAI_API_KEY not set. Configure a secret in the Instruqt web UI."
 fi
 
-echo "==> Track setup complete."
+# 7. Background FastF1 cache warm for current season.
+# Runs asynchronously so it doesn't block track startup.
+# Fetches the last 3 completed 2026 races so F1 queries don't cold-fetch
+# during the workshop. Non-fatal if it fails.
+nohup "${F1_MCP_HOME}/.venv/bin/python" - <<'PYWARM' > /tmp/f1-cache-warm.log 2>&1 &
+import fastf1, os, datetime
+cache_dir = '/opt/f1-mcp-server/cache'
+os.makedirs(cache_dir, exist_ok=True)
+fastf1.Cache.enable_cache(cache_dir)
+
+current_year = datetime.datetime.now().year
+try:
+    schedule = fastf1.get_event_schedule(current_year, include_testing=False)
+    completed = schedule[schedule['EventDate'] < datetime.datetime.now()]
+    recent = completed.tail(3)
+    for _, row in recent.iterrows():
+        try:
+            s = fastf1.get_session(current_year, row['EventName'], 'R')
+            s.load(telemetry=False, weather=False, messages=False)
+            print(f"Warmed {current_year} {row['EventName']} Race")
+        except Exception as e:
+            print(f"Skipped {row['EventName']}: {e}")
+except Exception as e:
+    print(f"Schedule fetch failed: {e}")
+PYWARM
+echo "FastF1 background cache warm started (see /tmp/f1-cache-warm.log)"
