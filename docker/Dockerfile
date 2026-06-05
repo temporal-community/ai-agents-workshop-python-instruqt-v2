@@ -104,29 +104,9 @@ RUN git clone https://github.com/rakeshgangwar/f1-mcp-server.git "${F1_MCP_HOME}
 ENV F1_MCP_SERVER_HOME=/opt/f1-mcp-server
 
 # ── 10. Pre-warm FastF1 cache ─────────────────────────────────────────────────
+COPY docker/warmup_f1_cache.py /tmp/warmup_f1_cache.py
 RUN mkdir -p "${F1_MCP_HOME}/cache" \
-    && "${F1_MCP_HOME}/.venv/bin/python" -c "
-import fastf1, os
-cache_dir = '/opt/f1-mcp-server/cache'
-os.makedirs(cache_dir, exist_ok=True)
-fastf1.Cache.enable_cache(cache_dir)
-# Pre-warm 2024 reference races
-for gp, session in [('Monaco', 'R'), ('Silverstone', 'R'), ('Monza', 'R')]:
-    try:
-        s = fastf1.get_session(2024, gp, session)
-        s.load(telemetry=False, weather=False, messages=False)
-        print(f'Warmed 2024 {gp} Race')
-    except Exception as e:
-        print(f'Skipped 2024 {gp}: {e}')
-# Pre-warm 2026 completed races
-for gp, session in [('Australia', 'R'), ('China', 'R'), ('Japan', 'R'), ('Miami', 'R'), ('Canada', 'R')]:
-    try:
-        s = fastf1.get_session(2026, gp, session)
-        s.load(telemetry=False, weather=False, messages=False)
-        print(f'Warmed 2026 {gp} Race')
-    except Exception as e:
-        print(f'Skipped 2026 {gp}: {e}')
-" || echo "FastF1 cache warm failed (non-fatal)"
+    && "${F1_MCP_HOME}/.venv/bin/python" /tmp/warmup_f1_cache.py || echo "FastF1 cache warm failed (non-fatal)"
 
 # ── 11. mitmproxy + CA cert ───────────────────────────────────────────────────
 RUN python3 -m venv /opt/mitmproxy-venv \
