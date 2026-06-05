@@ -16,18 +16,17 @@ description: |-
   in the Temporal Web UI.
 icon: ""
 tags:
-- ai-agents
 - mcp
 - openai
+- ai-agents
 - python
 - temporal
 owner: temporal
 developers:
 - marcus.merrell@temporal.io
-- cornelia.davis@temporal.io
+maintenance: true
 idle_timeout: 900
 timelimit: 10800
-maintenance: true
 lab_config:
   extend_ttl: 900
   sidebar_enabled: true
@@ -71,8 +70,9 @@ lab_config:
   - Ziggy is poking at the Workflow with his stylet to check that it tastes durable...
   theme:
     name: modern-dark
+  override_challenge_layout: true
+  hideStopButton: false
   default_layout: AssignmentLeft
   default_layout_sidebar_size: 35
-  override_challenge_layout: true
-checksum: "3375494959880702771"
+checksum: "14075622285282329129"
 enhanced_loading: false

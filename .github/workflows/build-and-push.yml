@@ -85,7 +85,9 @@ jobs:
     - name: Push track
       env:
         INSTRUQT_TOKEN: ${{ secrets.INSTRUQT_TOKEN }}
-      run: cd instruqt && instruqt track push --force
+      run: |
+        instruqt auth login --token "$INSTRUQT_TOKEN"
+        cd instruqt && instruqt track push --force
 
     - name: Commit writeback (checksum + tab ids)
       run: |
