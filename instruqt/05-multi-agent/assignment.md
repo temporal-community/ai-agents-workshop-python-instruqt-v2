@@ -1,6 +1,6 @@
 ---
 slug: multi-agent
-id: ""
+id: bgvlffymxc8u
 type: challenge
 title: 'Demo 5: Multi-Agent Orchestration'
 teaser: Three agents, three workflows. A personal assistant delegates to specialists
@@ -30,32 +30,39 @@ notes:
     Same result from the orchestrator's point of view. Different shapes
     in the event history.
 tabs:
-- title: Worker PA
+- id: mxfyeq9hrvp7
+  title: Worker PA
   type: terminal
   hostname: workshop
   workdir: /root/workshop/demo5-multi-agent
-- title: Worker F1
+- id: l2rtjamym8q6
+  title: Worker F1
   type: terminal
   hostname: workshop
   workdir: /root/workshop/demo5-multi-agent
-- title: Starter
+- id: wyykjfu4i6yv
+  title: Starter
   type: terminal
   hostname: workshop
   workdir: /root/workshop/demo5-multi-agent
-- title: Temporal UI
+- id: zv27fekpruih
+  title: Temporal UI
   type: service
   hostname: workshop
   port: 8233
-- title: Network Control Panel
+- id: jgmuec1bmeuc
+  title: Network Control Panel
   type: service
   hostname: workshop
   port: 5000
-- title: Editor
+- id: eufjafkekbwj
+  title: Editor
   type: code
   hostname: workshop
   path: /root/workshop/demo5-multi-agent
 difficulty: basic
 timelimit: 1800
+enhanced_loading: null
 ---
 
 # Demo 5: Multi-Agent Orchestration

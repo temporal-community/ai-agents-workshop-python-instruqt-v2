@@ -1,6 +1,6 @@
 ---
 slug: mcp-tools
-id: ""
+id: gu6xgg9hoav2
 type: challenge
 title: 'Demo 3: MCP Tool Servers'
 teaser: Add a Formula 1 data server via MCP. Each tool call becomes a durable Temporal
@@ -24,28 +24,34 @@ notes:
     Each listTools and callTool becomes its own activity in the workflow
     history - durable, retryable, observable - without extra code from you.
 tabs:
-- title: Worker
+- id: yquvcc9tnyrc
+  title: Worker
   type: terminal
   hostname: workshop
   workdir: /root/workshop/demo3-mcp
-- title: Starter
+- id: rb9hxf6uvs0t
+  title: Starter
   type: terminal
   hostname: workshop
   workdir: /root/workshop/demo3-mcp
-- title: Temporal UI
+- id: w5fbbcrdygzz
+  title: Temporal UI
   type: service
   hostname: workshop
   port: 8233
-- title: Network Control Panel
+- id: k5c4ucnjkewa
+  title: Network Control Panel
   type: service
   hostname: workshop
   port: 5000
-- title: Editor
+- id: vddwjbst8fym
+  title: Editor
   type: code
   hostname: workshop
   path: /root/workshop/demo3-mcp
 difficulty: basic
 timelimit: 1500
+enhanced_loading: null
 ---
 
 # Demo 3: MCP Tool Servers
