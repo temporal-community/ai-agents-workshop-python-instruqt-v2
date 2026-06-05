@@ -81,15 +81,6 @@ Click the [button label="Worker" background="#444CE7"](tab-0) terminal.
 uv run python -m worker
 ```
 
-The worker is ready when the cursor returns and you see worker output in the terminal.
-
-You should see:
-
-```bash,nocopy
-Worker started. Listening on task queue: tool-invoking-agent-python-task-queue
-Ready -- run the starter in the other terminal.
-```
-
 ## Run It
 
 Click the [button label="Starter" background="#444CE7"](tab-1) terminal.

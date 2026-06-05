@@ -92,12 +92,6 @@ Click the [button label="Java Worker" background="#444CE7"](tab-0) terminal. Dep
 ./mvnw spring-boot:run
 ```
 
-Wait for:
-
-```bash,nocopy
-Started TravelPlannerApplication
-```
-
 ## Start the Python Workers
 
 Click the [button label="Worker PA" background="#444CE7"](tab-1) terminal.
