@@ -9,7 +9,13 @@
 # The lab-start setup-workshop script stages /opt/workshop -> /root/workshop,
 # starts background services, and injects the OPENAI_API_KEY secret.
 
+ARG SECRET_BROKER_VERSION=main
+FROM public.ecr.aws/s1u1b8l5/tmprl-dem-cld/instruqt-secret-broker:${SECRET_BROKER_VERSION} AS secret-broker
+
 FROM ubuntu:22.04
+
+COPY --from=secret-broker /secret-broker /usr/local/bin/secret-broker
+RUN secret-broker --version
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV WORKSPACE=/opt/workshop

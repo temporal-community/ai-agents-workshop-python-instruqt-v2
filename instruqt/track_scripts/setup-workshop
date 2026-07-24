@@ -71,17 +71,8 @@ temporal operator nexus endpoint create \
     --target-task-queue travel-planner-agent-tq \
     --address 127.0.0.1:7233 || true
 
-# 6. Bridge OPENAI_API_KEY secret into the attendee shell.
-if [ -n "${OPENAI_API_KEY:-}" ]; then
-    cat >> /root/.bashrc <<EOF
-export OPENAI_API_KEY=${OPENAI_API_KEY}
-EOF
-    # Also write to /etc/environment so all sessions see it.
-    echo "OPENAI_API_KEY=${OPENAI_API_KEY}" >> /etc/environment
-    echo "OPENAI_API_KEY injected."
-else
-    echo "WARNING: OPENAI_API_KEY not set. Configure a secret in the Instruqt web UI."
-fi
+# 6. Use the secret broker to mint a litellm token and write it to the environment
+secret-broker litellm --duration=1d --budget=2
 
 # 7. Background FastF1 cache warm for current season.
 # Runs asynchronously so it doesn't block track startup.
