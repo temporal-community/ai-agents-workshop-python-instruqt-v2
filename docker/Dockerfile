@@ -79,6 +79,10 @@ ENV PATH="${PATH}:/root/.temporalio/bin"
 # into ./ai-agents-workshop-python/ in the build context.
 COPY ai-agents-workshop-python/ /opt/workshop/
 
+# FastF1 calls often outlast the Agents SDK's 5s MCP read default.
+COPY docker/patch_f1_mcp_timeout.py /tmp/patch_f1_mcp_timeout.py
+RUN python3 /tmp/patch_f1_mcp_timeout.py
+
 # ── 7. Python deps for all demos ──────────────────────────────────────────────
 RUN cd /opt/workshop/demo1-agentic-loop && uv sync \
     && cd /opt/workshop/demo2-openai-temporal-integration && uv sync \
